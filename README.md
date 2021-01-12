@@ -1,24 +1,52 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Colum     | Type   | Options     |
+| --------- | ------ | ----------- |
+| nickname  | string | null: false |
+| email     | string | null: false |
+| password  | string | null: false |
+| name      | string | null: false |
+| name_kana | string | null:false  |
+| birthday  | date   | null:false  |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :products
 
-* Configuration
+## products テーブル
 
-* Database creation
+| Colum     | Type   | Options     |
+| --------- | ------ | ----------- |
+| name      | string | null: false |
+| explanation | text | null: false |
+| category    | integer | null: false |
+| condition   | integer | null: false |
+| shipping_charge | integer | null: false |
+| shipping_area | integer | null: false |
+| shipping_days | integer | null: false |
+| product_price | integer | null: false |
+| user_id   | references | null:false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :purchasers
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchasers テーブル
 
-* Deployment instructions
+| Colum     | Type   | Options     |
+| --------- | ------ | ----------- |
+| destination | string | null: false |
+| phone_number | integer | null: false |
+| card_number | integer   | null: false |
+| card_expiration | data | null: false |
+| card_cvv    | integer   | null: false |
+| product_id | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+ - belongs_to :product
+
+
