@@ -1,24 +1,66 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Colum               | Type   | Options     |
+| ------------------- | ------ | ----------- |
+| nickname            | string | null: false |
+| email               | string | null: false |
+| encrypted_password  | string | null: false |
+| family_name         | string | null: false |
+| first_name          | string | null: false |
+| family_name_kana    | string | null:false  |
+| first_name_kana     | string | null:false  |
+| birthday            | date   | null:false  |
 
-* Ruby version
+### Association
+- has_many :products
+- has_many :histories
 
-* System dependencies
+## products テーブル
 
-* Configuration
+| Colum              | Type       | Options                       |
+| ------------------ | ---------- | ----------------------------- |
+| name               | string     | null: false                   |
+| explanation        | text       | null: false                   |
+| category_id        | integer    | null: false                   |
+| condition_id       | integer    | null: false                   |
+| shipping_charge_id | integer    | null: false                   |
+| shipping_area_id   | integer    | null: false                   |
+| shipping_day_id    | integer    | null: false                   |
+| product_price      | integer    | null: false                   |
+| user               | references | null:false, foreign_key: true |
 
-* Database creation
+### Association
+- belongs_to :user
+- has_ons :history
 
-* Database initialization
+## histories テーブル
 
-* How to run the test suite
+| Colum     | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| user      | references | null: false, foreign_key: true |
+| product   | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
+belongs_to :product
+has_one :address
+belongs_to :user
 
-* Deployment instructions
+## addresses テーブル 
 
-* ...
+| Colum         | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal code   | integer    | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building_name | string     |                                |
+| phone_number  | integer    | null: false                    |
+| history       | references | null: false, foreign_key: true |
+
+### Association
+belongs_to :history
+
+
+
