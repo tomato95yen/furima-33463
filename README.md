@@ -2,17 +2,20 @@
 
 ## users テーブル
 
-| Colum     | Type   | Options     |
-| --------- | ------ | ----------- |
-| nickname  | string | null: false |
-| email     | string | null: false |
-| password  | string | null: false |
-| name      | string | null: false |
-| name_kana | string | null:false  |
-| birthday  | date   | null:false  |
+| Colum               | Type   | Options     |
+| ------------------- | ------ | ----------- |
+| nickname            | string | null: false |
+| email               | string | null: false |
+| encrypted_password  | string | null: false |
+| family_name         | string | null: false |
+| first_name          | string | null: false |
+| family_name_kana    | string | null:false  |
+| first_name_kana     | string | null:false  |
+| birthday            | date   | null:false  |
 
 ### Association
 - has_many :products
+- has_many :histories
 
 ## products テーブル
 
@@ -20,11 +23,11 @@
 | ------------------ | ---------- | ----------------------------- |
 | name               | string     | null: false                   |
 | explanation        | text       | null: false                   |
-| category           | integer    | null: false                   |
-| condition          | integer    | null: false                   |
-| shipping_charge    | integer    | null: false                   |
-| shipping_area      | integer    | null: false                   |
-| shipping_days      | integer    | null: false                   |
+| category_id        | integer    | null: false                   |
+| condition_id       | integer    | null: false                   |
+| shipping_charge_id | integer    | null: false                   |
+| shipping_area_id   | integer    | null: false                   |
+| shipping_day_id    | integer    | null: false                   |
 | product_price      | integer    | null: false                   |
 | user               | references | null:false, foreign_key: true |
 
@@ -36,21 +39,25 @@
 
 | Colum     | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
-| history   | boolean    | null: false                    |
-| purchaser | integer    | null: false                    |
+| user      | references | null: false, foreign_key: true |
 | product   | references | null: false, foreign_key: true |
 
 ### Association
 belongs_to :product
 has_one :address
+belongs_to :user
 
 ## addresses テーブル 
 
-| Colum        | Type    | Options     |
-| ------------ | ------- | ----------- |
-| address      | text    | null: false |
-| phone_number | integer | null: false |
-| purchaser    | integer | null: false |
+| Colum         | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal code   | integer    | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building_name | string     |                                |
+| phone_number  | integer    | null: false                    |
+| history       | references | null: false, foreign_key: true |
 
 ### Association
 belongs_to :history
