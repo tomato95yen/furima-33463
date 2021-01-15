@@ -9,12 +9,12 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   validates_format_of :password, with: PASSWORD_REGEX
   with_options presence: true, format: { with: NAME_REGEX } do
-    validates :family_name, presence: true
-    validates :first_name, presence: true
+    validates :family_name
+    validates :first_name
   end
   with_options presence: true, format: { with: NAME_KANA_REGEX } do
-    validates :family_name_kana, presence: true
-    validates :first_name_kana, presence: true
+    validates :family_name_kana
+    validates :first_name_kana
   end
   validates :birthday, presence: true
 end
