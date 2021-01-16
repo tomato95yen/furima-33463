@@ -19,5 +19,5 @@ def move_to_sign_in
 end
 
 def item_params
-  params.require(:item).permit(:name, :explanation, :category_id, :condition_id, shipping_charge_id, shipping_area_id, shipping_day_id, item_price).merge(user_id: current_user.id)
+  params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :shipping_charge_id, :shipping_area_id, :shipping_day_id, :item_price, :image).merge(user_id: current_user.id)
 end
