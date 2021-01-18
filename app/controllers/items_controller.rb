@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_sign_in, only: [:new]
+  before_action :authenticate_user!, only: [:new]
 
   def index
   end
@@ -18,10 +18,6 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def move_to_sign_in
-    redirect_to new_user_session_path unless user_signed_in?
-  end
 
   def item_params
     params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :shipping_charge_id, :shipping_area_id,
