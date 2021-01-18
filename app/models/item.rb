@@ -1,9 +1,11 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :shipping_charge
   belongs_to :shipping_area
   belongs_to :shipping_day
@@ -27,4 +29,5 @@ class Item < ApplicationRecord
     validates :shipping_area_id
     validates :shipping_day_id
   end
+
 end

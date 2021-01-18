@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_sign_in, only: [:new]
+
   def index
   end
 

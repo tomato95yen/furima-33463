@@ -1,4 +1,4 @@
-class Shipping_area < ActiveHash::Base
+class ShippingArea < ActiveHash::Base
   self.data = [
     {id: 1, name: '---' },
     {id: 2, name: '北海道'}, 
@@ -50,7 +50,7 @@ class Shipping_area < ActiveHash::Base
     {id: 48, name: '沖縄県'}
   ]
 
-  nclude ActiveHash::Associations
+  include ActiveHash::Associations
   has_many :items
 end
 
