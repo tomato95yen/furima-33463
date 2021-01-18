@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  
-  before do 
+  before do
     @item = FactoryBot.build(:item)
   end
   describe '商品の新規登録' do
@@ -30,27 +29,27 @@ RSpec.describe Item, type: :model do
       it 'カテゴリーを選択しなければ登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it '商品の状態を選択しなければ登録できない' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
       it '配送料の負担について選択しなければ登録できない' do
         @item.shipping_charge_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping charge must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping charge must be other than 1')
       end
       it '発送元の地域を選択しなければ登録できない' do
         @item.shipping_area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping area must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping area must be other than 1')
       end
       it '発送までの日数を選択しなければ登録できない' do
         @item.shipping_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping day must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping day must be other than 1')
       end
       it '価格を設定しなければ登録できない' do
         @item.item_price = nil
@@ -60,19 +59,18 @@ RSpec.describe Item, type: :model do
       it '価格は¥300以上でなければ登録できない' do
         @item.item_price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price must be greater than 300")
+        expect(@item.errors.full_messages).to include('Item price must be greater than 300')
       end
       it '価格は¥9,999,999以下でなければ登録できない' do
-        @item.item_price = 10000000
+        @item.item_price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price must be less than 9999999")
+        expect(@item.errors.full_messages).to include('Item price must be less than 9999999')
       end
       it '価格は半角数字でなければ登録できない' do
-        @item.item_price = "３００"
+        @item.item_price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price is not a number")
+        expect(@item.errors.full_messages).to include('Item price is not a number')
       end
     end
-
   end
 end
