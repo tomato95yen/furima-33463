@@ -5,12 +5,12 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :shipping_charge
   belongs_to :shipping_area
   belongs_to :shipping_day
 
   with_options presence: true do
+    validates :image
     validates :name
     validates :explanation
     validates :category_id
@@ -18,9 +18,8 @@ class Item < ApplicationRecord
     validates :shipping_charge_id
     validates :shipping_area_id
     validates :shipping_day_id
-    validates :user_id
   end
-  validates :item_price, presence: true, numericality:{only_integer: true, geater_than: 300, less_than: 9999999}, format: {with: /\A[0-9]+\z/}
+  validates :item_price, presence: true, numericality:{only_integer: true, greater_than: 300, less_than: 9999999}, format: {with: /\A[0-9]+\z/}
 
   with_options numericality: { other_than: 1 } do
     validates :category_id
