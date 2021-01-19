@@ -14,10 +14,10 @@
 | birthday            | date   | null:false  |
 
 ### Association
-- has_many :products
+- has_many :items
 - has_many :histories
 
-## products テーブル
+## items テーブル
 
 | Colum              | Type       | Options                       |
 | ------------------ | ---------- | ----------------------------- |
@@ -28,7 +28,7 @@
 | shipping_charge_id | integer    | null: false                   |
 | shipping_area_id   | integer    | null: false                   |
 | shipping_day_id    | integer    | null: false                   |
-| product_price      | integer    | null: false                   |
+| item_price      | integer    | null: false                   |
 | user               | references | null:false, foreign_key: true |
 
 ### Association
@@ -40,12 +40,12 @@
 | Colum     | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
 | user      | references | null: false, foreign_key: true |
-| product   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
-belongs_to :product
-has_one :address
-belongs_to :user
+- belongs_to :item
+- has_one :address
+- belongs_to :user
 
 ## addresses テーブル 
 
