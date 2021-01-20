@@ -36,18 +36,16 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
-  
+
   private
 
   def item_params
-    params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :shipping_charge_id, :shipping_area_id,:shipping_day_id, :item_price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :shipping_charge_id, :shipping_area_id,
+                                 :shipping_day_id, :item_price, :image).merge(user_id: current_user.id)
   end
 
   def user_validate
     item = Item.find(params[:id])
-    if current_user.id != item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id != item.user_id
   end
-
 end
