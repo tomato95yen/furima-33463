@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  belongs_to :user_item
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belings_to :shipping_area
 
