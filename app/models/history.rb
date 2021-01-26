@@ -3,11 +3,11 @@ class History
   attr_accessor :postal_code, :prefecture_id, :city, :block, :building_name, :phone_number, :token, :user_id, :item_id
 
   with_options presence: true do
-    validates :postal_code
-    validates :prefecture_id
+    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
+    validates :prefecture_id, numericality: { other_than: 1 }
     validates :city
     validates :block
-    validates :phone_number
+    validates :phone_number, format: { with:/\A\d{,11}\z/ }
     validates :token
   end
 
