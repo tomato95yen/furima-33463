@@ -51,13 +51,13 @@
 
 | Colum         | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| postal_code   | integer    | null: false                    |
+| postal_code   | string    | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | block         | string     | null: false                    |
 | building_name | string     |                                |
-| phone_number  | integer    | null: false                    |
-| user_items       | references | null: false, foreign_key: true |
+| phone_number  | string    | null: false                    |
+| user_item       | references | null: false, foreign_key: true |
 
 ### Association
 belongs_to :user_item
