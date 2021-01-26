@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :item_sold
+  before_action :item_sold, only: [:create]
   before_action :find_item, only: [:index, :create, :item_sold]
 
   def index
@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   def item_sold
     user_items = UserItem.all
     item_ids = user_items.pluck(:item_id)
-    if item_ids.include?(@item.id)
+    if item_ids.include?(params[:item_id])
       redirect_to root_path
     end
   end
