@@ -1,31 +1,29 @@
 class OrdersController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
-    @order = Order.new
-
+    @history = History.new
   end
 
 
   def create
-    @order = Order.new(order_params)
-    if @order.valid?
+    @item = Item.find(params[:item_id])
+    @history = History.new(history_params)
+    if @history.valid?
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
-        amount: order_params[:price],
-        card: order_params[:token],
+        amount: @item.item_price,
+        card: history_params[:token],
         currency: 'jpy'
       )
-      @order.save
+      @history.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
   
   private
-  def order_params
-    binding.pry
-    params.require(:order).permit(:postal_code, :prefecture_id, :city, :block, :building_name, :phone_number).merge(token: params[:token], user_id: params[:current_user.id])
+  def history_params
+    params.require(:history).permit(:postal_code,:prefecture_id, :city, :block, :phone_number, :user_item_id, :user_id).merge(token: params[:token], user_id: current_user.id, item_id: @item.id )
   end
 end
