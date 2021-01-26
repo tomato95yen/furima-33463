@@ -34,7 +34,6 @@ class OrdersController < ApplicationController
   end
 
   def item_owner
-    find_item
     if @item.user_id == current_user.id
       redirect_to root_path
     end
