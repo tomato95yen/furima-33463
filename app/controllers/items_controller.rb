@@ -23,6 +23,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    user_items = UserItem.all
+    @item_ids = user_items.pluck(:item_id)
   end
 
   def edit
