@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
+    user_items = UserItem.all
+    @item_ids = user_items.pluck(:item_id)
   end
 
   def new
