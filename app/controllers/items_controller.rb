@@ -6,8 +6,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
-    user_items = UserItem.all
-    @item_ids = user_items.pluck(:item_id)
   end
 
   def new
@@ -24,8 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    user_items = UserItem.all
-    @item_ids = user_items.pluck(:item_id)
   end
 
   def edit
@@ -64,8 +60,6 @@ class ItemsController < ApplicationController
   end
 
   def item_sold
-    user_items = UserItem.all
-    item_ids = user_items.pluck(:item_id)
-    redirect_to root_path if item_ids.include?(params[:id].to_i)
+    redirect_to root_path if @item.user_item.present?
   end
 end

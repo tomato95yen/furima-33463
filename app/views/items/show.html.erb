@@ -8,7 +8,7 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <% if @item_ids.include?(@item.id) %>
+      <% if @item.user_item.present? %>
       <div class='sold-out'>
         <span>Sold Out!!</span>
       </div>
@@ -23,7 +23,7 @@
       </span>
     </div>
 
-    <% unless @item_ids.include?(@item.id) %>
+    <% if @item.user_item.blank? %>
     <% if user_signed_in?%>
     <% if current_user.id == @item.user_id %>
 
