@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :user_validate, only: :edit
   before_action :find_item, only: [:edit, :show, :update]
+  before_action :item_sold, only: :edit
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -49,8 +50,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :shipping_charge_id, :shipping_area_id,
-                                 :shipping_day_id, :item_price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :shipping_charge_id, :shipping_area_id,:shipping_day_id, :item_price, :image).merge(user_id: current_user.id)
   end
 
   def user_validate
@@ -60,5 +60,13 @@ class ItemsController < ApplicationController
 
   def find_item
     @item = Item.find(params[:id])
+  end
+
+  def item_sold
+    user_items = UserItem.all
+    item_ids = user_items.pluck(:item_id)
+    if item_ids.include?(params[:id].to_i)
+      redirect_to root_path
+    end
   end
 end
