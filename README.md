@@ -57,7 +57,7 @@
 | block         | string     | null: false                    |
 | building_name | string     |                                |
 | phone_number  | integer    | null: false                    |
-| item_order       | references | null: false, foreign_key: true |
+| user_items       | references | null: false, foreign_key: true |
 
 ### Association
 belongs_to :user_item

@@ -1,8 +1,10 @@
 class Order < ApplicationRecord
+  attr_accessor :token
+  validates :token, presence: true
   belongs_to :user_item
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belings_to :shipping_area
+  belongs_to :shipping_area
 
   with_options presence: true do
     validates :postal_code
