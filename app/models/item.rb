@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
+  has_one :user_item
+
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -19,6 +21,7 @@ class Item < ApplicationRecord
     validates :shipping_area_id
     validates :shipping_day_id
   end
+
   validates :item_price, presence: true, numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 },
                          format: { with: /\A[0-9]+\z/ }
 
