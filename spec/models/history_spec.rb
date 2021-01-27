@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe History, type: :model do
   before do
-    @history = FactoryBot.build(:history)
+    @user = FactoryBot.build(:user)
+    user_id = @user.id
+    @item = FactoryBot.build(:item)
+    item_id = @item.id
+    @history = FactoryBot.build(:history, user_id: user_id, item_id: item_id)
   end
   describe '購入情報の保存' do
     context '購入情報が保存できるとき' do
@@ -71,12 +75,12 @@ RSpec.describe History, type: :model do
         expect(@history.errors.full_messages).to include("Token can't be blank")
       end
       it 'user_idが空だと購入できない' do
-        @history.user_id = ""
+        @history.user_id = nil
         @history.valid?
         expect(@history.errors.full_messages).to include("User can't be blank")
       end
       it 'item_idが空だと購入できない' do
-        @history.item_id = ""
+        @history.item_id = nil
         @history.valid?
         expect(@history.errors.full_messages).to include("Item can't be blank")
       end

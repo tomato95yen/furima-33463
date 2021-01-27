@@ -1,8 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  # before_action :item_sold
-  before_action :item_owner
-  before_action :find_item, only: [:index, :create]
+  before_action :find_item, only: [:index, :create, :item_sold ]
+  before_action :item_sold
 
   def index
     @history = History.new
@@ -28,13 +27,7 @@ class OrdersController < ApplicationController
   end
 
   def item_sold
-    @item = Item.find(params[:item_id])
-    redirect_to root_path if @item.user_item.present?
-  end
-
-  def item_owner
-    @item = Item.find(params[:item_id])
-    if @item.user_id == current_user.id
+    if (@item.user_id == current_user.id) || (@item.user_item.present?)
       redirect_to root_path
     end
   end
