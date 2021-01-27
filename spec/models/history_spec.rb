@@ -3,10 +3,8 @@ require 'rails_helper'
 RSpec.describe History, type: :model do
   before do
     @user = FactoryBot.build(:user)
-    user_id = @user.id
     @item = FactoryBot.build(:item)
-    item_id = @item.id
-    @history = FactoryBot.build(:history, user_id: user_id, item_id: item_id)
+    @history = FactoryBot.build(:history, user_id: @user.id, item_id: @item.id)
   end
   describe '購入情報の保存' do
     context '購入情報が保存できるとき' do
