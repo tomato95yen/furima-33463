@@ -42,6 +42,11 @@ RSpec.describe History, type: :model do
         @history.valid?
         expect(@history.errors.full_messages).to include('Prefecture must be other than 1')
       end
+      it '都道府県が空では保存できない' do
+        @history.prefecture_id = nil
+        @history.valid?
+        expect(@history.errors.full_messages).to include("Prefecture can't be blank")
+      end
       it '市区町村が空では保存できない' do
         @history.city = ''
         @history.valid?
