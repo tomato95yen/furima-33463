@@ -25,7 +25,7 @@ class Item < ApplicationRecord
   validates :item_price, presence: true, numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 },
                          format: { with: /\A[0-9]+\z/ }
 
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1, message: "を選択してください" } do
     validates :category_id
     validates :condition_id
     validates :shipping_charge_id
