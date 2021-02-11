@@ -10,6 +10,7 @@ if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
     const blobImage = document.createElement('img')
     blobImage.setAttribute('src', blob)
     blobImage.setAttribute('class', "image-size")
+    blobImage.setAttribute('id', 'image1')
 
     const inputHTML = document.createElement('img')
     // inputHTML.setAttribute('id', `item_image_${imageElementNum}`)
@@ -29,10 +30,10 @@ if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
   }
 
   document.getElementById('item-image1').addEventListener('change', (e) => {
-    // const imageContent = document.querySelector('img');
-    //   if (imageContent){
-    //     imageContent.remove();
-    //   }
+    const imageContent = document.querySelector("#image1");
+      if (imageContent){
+        imageContent.remove();
+      }
     const file = e.target.files[0];
     const blob = window.URL.createObjectURL(file);
 
